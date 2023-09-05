@@ -1,0 +1,6 @@
+PyPDF2
+pdfplumber
+pdf2image
+pytesseract
+python-docx
+odfpy

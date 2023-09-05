@@ -1,0 +1,30 @@
+# Python Bytecode files
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual Environment
+venv/
+env/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# IDE - Visual Studio Code
+.vscode/
+
+# Logs and databases
+*.log
+*.sqlite
+
+# Cache files for Python dependencies
+*.egg-info/
+dist/
+
+# General
+.DS_Store
+Thumbs.db
+
+# Custom - Output & Temp files
+aggregated_output.txt
+temp/
