@@ -69,7 +69,9 @@ def aggregate_files(folder_path):
     total_files = len(files_list)
 
     # Open the output file in append mode
-    with open("aggregated_output.txt", "a") as out_file:
+
+    with open("aggregated_output.txt", "a", encoding="utf-8") as out_file:
+        # Your code
         for index, filename in enumerate(files_list):
             file_path = os.path.join(folder_path, filename)
             remaining_files = total_files - (index + 1)
@@ -93,8 +95,14 @@ def aggregate_files(folder_path):
             elif filename.endswith(".docx"):
                 text_to_add = read_docx(file_path)
 
+            # Encode and decode text_to_add to handle special characters
+            text_to_add = text_to_add.encode("utf-8").decode("utf-8", "ignore")
+
             # Append the text directly to the file
-            out_file.write(text_to_add)
+            try:
+                out_file.write(text_to_add)
+            except UnicodeEncodeError:
+                print(f"Couldn't encode text from file: {filename}")
 
             print(f"Finished aggregation of {filename}")
 
