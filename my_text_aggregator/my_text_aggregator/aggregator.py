@@ -69,11 +69,17 @@ def aggregate_files(folder_path):
     files_list = os.listdir(folder_path)
     total_files = len(files_list)
 
-    # Open the output file in append mode
+    processed_files = set()
+    if os.path.exists("processed_files.txt"):
+        with open("processed_files.txt", "r") as f:
+            processed_files = set(f.read().splitlines())
 
     with open("aggregated_output.txt", "a", encoding="utf-8") as out_file:
-        # Your code
         for index, filename in enumerate(files_list):
+            if filename in processed_files:
+                print(f"Skipping already processed file: {filename}")
+                continue
+
             file_path = os.path.join(folder_path, filename)
             remaining_files = total_files - (index + 1)
 
@@ -104,6 +110,9 @@ def aggregate_files(folder_path):
                 out_file.write(text_to_add)
             except UnicodeEncodeError:
                 print(f"Couldn't encode text from file: {filename}")
+
+            with open("processed_files.txt", "a") as f:
+                f.write(f"{filename}\n")
 
             print(f"Finished aggregation of {filename}")
             gc.collect()
