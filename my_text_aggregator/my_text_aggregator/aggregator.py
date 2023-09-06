@@ -1,5 +1,6 @@
 import os
 import argparse
+import gc
 
 import PyPDF2
 import pdfplumber
@@ -105,6 +106,7 @@ def aggregate_files(folder_path):
                 print(f"Couldn't encode text from file: {filename}")
 
             print(f"Finished aggregation of {filename}")
+            gc.collect()
 
         print("Aggregated output saved to 'aggregated_output.txt'.")
 
